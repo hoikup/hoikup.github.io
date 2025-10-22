@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoikUp（ほいくあっぷ）- 保育アイデアを探して・シェアできるアプリ</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom color palette */
+        :root {
+            --color-base: #FDF6F0;
+            --color-accent: #FFC5D0;
+            --color-light: #FFF9F9;
+            --color-secondary: #D6A7B4;
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Button hover animation */
+        .btn-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-hover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(255, 197, 208, 0.3);
+        }
+
+        /* Gradient background */
+        .gradient-bg {
+            background: linear-gradient(135deg, #FDF6F0 0%, #FFF9F9 50%, #FFC5D0 100%);
+        }
+
+        .gradient-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        /* Card shadow */
+        .card-shadow {
+            box-shadow: 0 4px 15px rgba(214, 167, 180, 0.15);
+        }
+
+        /* Image carousel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 640px) {
+            .carousel-container {
+                max-width: 280px;
+            }
+        }
+
+        .carousel-slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: -20px;
+        }
+
+        .carousel-nav.next {
+            right: -20px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #D6A7B4;
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            opacity: 1;
+            background: #FFC5D0;
+        }
+
+        /* Image aspect ratio handling */
+        .intro-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .intro-image {
+                height: 300px;
+            }
+        }
+
+        .feature-card-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Header logo */
+        .header-logo {
+            height: 40px;
+            width: auto;
+        }
+
+        @media (max-width: 640px) {
+            .header-logo {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#FDF6F0]">
+
+    <!-- Header / Logo -->
+    <header class="py-4 px-6 bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="img/Logo.png" alt="HoikUp" class="header-logo">
+            </div>
+            <a href="https://lin.ee/pg7pZQL" class="bg-[#6DADE3] text-white px-6 py-2 rounded-full text-sm font-medium btn-hover">
+                事前登録はこちら(LINEアプリ)
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-16 px-6 overflow-hidden gradient-bg">
+        <!-- Gradient circles -->
+        <div class="gradient-circle" style="width: 300px; height: 300px; top: -100px; left: -100px; background: #FFC5D0;"></div>
+        <div class="gradient-circle" style="width: 400px; height: 400px; bottom: -150px; right: -150px; background: #D6A7B4;"></div>
+
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Hero Image -->
+                <div class="mb-6 fade-in">
+                    <img src="img/women.jpg"
+                         alt="保育士イメージ"
+                         class="rounded-3xl w-full max-w-2xl mx-auto card-shadow">
+                </div>
+
+                <!-- Hero Text -->
+                <div class="fade-in">
+                    <p class="text-sm md:text-base mb-4" style="color: #333;">
+                        明日の保育が、もっと楽しくなる。
+                    </p>
+                    <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-4" style="color: #FFC5D0;">
+                        HoikUp
+                    </h2>
+                    <p class="text-lg md:text-xl mb-8" style="color: #555;">
+                        保育士が「明日」もっとワクワクするアプリ。<br>
+                        毎日の保育に、すこしの「あっぷ」を届けます。
+                    </p>
+                    <a href="https://lin.ee/pg7pZQL" class="inline-block bg-[#6DADE3] text-white px-10 py-4 rounded-full text-lg font-medium btn-hover">
+                        事前登録はこちらから<br>(LINEアプリ)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Mockup Section with Carousel -->
+    <section class="py-16 px-6 bg-gradient-to-b from-[#FFF9F9] to-[#FDF6F0]">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto fade-in">
+                <p class="text-center text-sm mb-8" style="color: #666;">
+                    HoikUp（ほいくあっぷ）は、<br>
+                    保育アイデアを探して・シェアできるアプリです。<br>
+                    製作・遊び・行事…あなたの工夫が、<br>
+                    誰かの助けになります。
+                </p>
+
+                <!-- Carousel -->
+                <div class="carousel-container">
+                    <button class="carousel-nav prev" onclick="changeSlide(-1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="#FFC5D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <div class="carousel-slide active">
+                        <img src="img/mock1.png"
+                             alt="アプリ画面"
+                             class="rounded-3xl mx-auto card-shadow">
+                        <p class="text-center mt-4 text-sm" style="color: #666;">※開発中のイメージです</p>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <img src="img/mock2.png"
+                             alt="アプリ画面"
+                             class="rounded-3xl mx-auto card-shadow">
+                        <p class="text-center mt-4 text-sm" style="color: #666;">※開発中のイメージです</p>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <img src="img/mock3.png"
+                             alt="アプリ画面"
+                             class="rounded-3xl mx-auto card-shadow">
+                        <p class="text-center mt-4 text-sm" style="color: #666;">※開発中のイメージです</p>
+                    </div>
+
+                    <button class="carousel-nav next" onclick="changeSlide(1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="#FFC5D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <div class="carousel-dots">
+                        <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+                        <span class="carousel-dot" onclick="goToSlide(1)"></span>
+                        <span class="carousel-dot" onclick="goToSlide(2)"></span>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="https://lin.ee/pg7pZQL" class="inline-block bg-[#6DADE3] text-white px-10 py-4 rounded-full text-lg font-medium btn-hover">
+                        事前登録はこちらから<br>(LINEアプリ)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section 01 -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
+                <div>
+                    <img src="img/introduction01.png"
+                         alt="保育アイデア"
+                         class="rounded-3xl card-shadow intro-image">
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6" style="color: #333;">
+                        <span class="text-5xl font-poppins" style="color: #FFC5D0;">01</span><br>
+                        こんなお悩みありませんか？
+                    </h3>
+                    <ul class="space-y-3 text-base" style="color: #555;">
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            明日の保育アイデアが思い浮かばない
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            忙しい業務の合間に時短で保育情報を探したい
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            参考にした記事が見つからなくなった
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            他の保育士さんの工夫をもっと知りたい
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section 02 -->
+    <section class="py-16 px-6 bg-[#FFF9F9]">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-bold mb-6" style="color: #333;">
+                        <span class="text-5xl font-poppins" style="color: #FFC5D0;">02</span><br>
+                        HoikUpでできること
+                    </h3>
+                    <p class="text-base leading-relaxed" style="color: #555;">
+                        🔍 アイデアを探す：カテゴリやキーワードから簡単検索<br>
+                        📷 投稿する：写真やメモをアップしてアイデアを残せる<br>
+                        💾 保存する：気に入ったアイデアをマイページにストック<br>
+                        💬 共有する：同じ保育士同士でアイデアをシェア<br>
+                    </p>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="img/introduction02.png"
+                         alt="HoikUpでできること"
+                         class="rounded-3xl card-shadow intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section 03 -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
+                <div>
+                    <img src="img/introduction03.png"
+                         alt="使うメリット"
+                         class="rounded-3xl card-shadow intro-image">
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6" style="color: #333;">
+                        <span class="text-5xl font-poppins" style="color: #FFC5D0;">03</span><br>
+                        使うメリット
+                    </h3>
+                    <ul class="space-y-3 text-base" style="color: #555;">
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            明日の保育がすぐ決まる
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            ネタ探しの時間を短縮できる
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            自分の工夫が仲間の役に立つ
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            アイデアがどんどん貯まっていく
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 Feature Cards -->
+    <section class="py-16 px-6 bg-gradient-to-b from-[#FFF9F9] to-[#FDF6F0]">
+        <div class="container mx-auto">
+            <div class="text-center mb-12 fade-in">
+                <h3 class="text-3xl font-bold mb-4" style="color: #333;">4つの便利機能</h3>
+                <div class="w-16 h-1 bg-[#FFC5D0] mx-auto rounded-full"></div>
+            </div>
+
+            <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- SEARCH -->
+                <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
+                    <div class="mb-4">
+                        <img src="img/feature1.jpg"
+                             alt="検索"
+                             class="mx-auto feature-card-image rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-lg mb-3" style="color: #333;">SEARCH</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">
+                        製作・遊び・行事のアイデアを写真やタグで簡単検索！<br><br>
+                        明日の保育にすぐ役立つ工夫が見つかります。
+                    </p>
+                </div>
+
+                <!-- SAVE -->
+                <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
+                    <div class="mb-4">
+                        <img src="img/feature2.jpg"
+                             alt="保存"
+                             class="mx-auto feature-card-image rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-lg mb-3" style="color: #333;">SAVE</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">
+                        気になるアイデアはワンタップでお気に入りに！<br><br>
+                        Wi-Fiがない場所でも見返せるので、<br>
+                        園内や外出先でも安心です。
+                    </p>
+                </div>
+
+                <!-- POST -->
+                <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
+                    <div class="mb-4">
+                        <img src="img/feature3.jpg"
+                             alt="投稿"
+                             class="mx-auto feature-card-image rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-lg mb-3" style="color: #333;">POST</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">
+                        写真とひとことメモで、自分の工夫を簡単記録！<br><br>
+                        忙しい保育の合間でもサッと残せます。<br>
+                        仲間とアイデアを共有して、<br>
+                        保育の幅が広がります。
+                    </p>
+                </div>
+
+                <!-- SHARE -->
+                <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
+                    <div class="mb-4">
+                        <img src="img/feature4.jpg"
+                             alt="共有"
+                             class="mx-auto feature-card-image rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-lg mb-3" style="color: #333;">SHARE</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">
+                        気になるアイデアを仲間にシェア！<br><br>
+                        同僚や友人とも簡単に共有でき、<br>
+                        保育の工夫がもっと広がります。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA Section -->
+    <section id="register" class="py-16 px-6 bg-[#FFF9F9]">
+        <div class="container mx-auto">
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <h3 class="text-3xl font-bold mb-4" style="color: #333;">お問い合わせ</h3>
+                <div class="w-16 h-1 bg-[#FFC5D0] mx-auto rounded-full mb-8"></div>
+
+                <!-- Instagram Link -->
+                <div class="mt-8">
+                    <a href="https://www.instagram.com/hoikup_official/" target="_blank" class="inline-flex items-center justify-center text-base font-medium" style="color: #6DADE3;">
+                        <img src="img/Instagram_Glyph_Gradient.svg" alt="Instagram" class="w-6 h-6 mr-2">
+                        @hoikup_official
+                    </a>
+                    <p class="text-sm mt-2" style="color: #666;">DMにてお問い合わせください。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-white text-center">
+        <p class="text-sm" style="color: #999;">Copyright 2025 HoikUp. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function showSlide(n) {
+            if (n >= slides.length) currentSlide = 0;
+            if (n < 0) currentSlide = slides.length - 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Auto-play carousel (optional)
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
