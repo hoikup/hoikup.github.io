@@ -31,12 +31,13 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Custom color palette */
+        /* Custom color palette - オレンジ→ピンクグラデーション */
         :root {
-            --color-base: #FDF6F0;
-            --color-accent: #FFC5D0;
+            --color-base: #FFF9F5;
+            --color-accent-orange: #FFB366;
+            --color-accent-pink: #FFB3C5;
             --color-light: #FFF9F9;
-            --color-secondary: #D6A7B4;
+            --color-secondary: #FFD9A3;
         }
 
         /* Fade in animation */
@@ -58,12 +59,12 @@
 
         .btn-hover:hover {
             transform: scale(1.02);
-            box-shadow: 0 10px 25px rgba(255, 197, 208, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 179, 102, 0.3);
         }
 
-        /* Gradient background */
+        /* Gradient background - オレンジ→ピンクグラデーション */
         .gradient-bg {
-            background: linear-gradient(135deg, #FDF6F0 0%, #FFF9F9 50%, #FFC5D0 100%);
+            background: linear-gradient(135deg, #FFF9F5 0%, #FFE5CC 30%, #FFDCE5 70%, #FFD5E0 100%);
         }
 
         .gradient-circle {
@@ -76,7 +77,7 @@
 
         /* Card shadow */
         .card-shadow {
-            box-shadow: 0 4px 15px rgba(214, 167, 180, 0.15);
+            box-shadow: 0 4px 15px rgba(255, 179, 102, 0.15);
         }
 
         /* Image carousel */
@@ -154,7 +155,7 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #D6A7B4;
+            background: #FFB366;
             opacity: 0.3;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -162,7 +163,7 @@
 
         .carousel-dot.active {
             opacity: 1;
-            background: #FFC5D0;
+            background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);
         }
 
         /* Image aspect ratio handling */
@@ -188,18 +189,18 @@
 
         /* Header logo */
         .header-logo {
-            height: 40px;
+            height: 60px;
             width: auto;
         }
 
         @media (max-width: 640px) {
             .header-logo {
-                height: 32px;
+                height: 48px;
             }
         }
     </style>
 </head>
-<body class="bg-[#FDF6F0]">
+<body class="bg-[#FFF9F5]">
 
     <!-- Header / Logo -->
     <header class="py-4 px-6 bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 shadow-sm">
@@ -216,8 +217,8 @@
     <!-- Hero Section -->
     <section class="relative pt-24 pb-16 px-6 overflow-hidden gradient-bg">
         <!-- Gradient circles -->
-        <div class="gradient-circle" style="width: 300px; height: 300px; top: -100px; left: -100px; background: #FFC5D0;"></div>
-        <div class="gradient-circle" style="width: 400px; height: 400px; bottom: -150px; right: -150px; background: #D6A7B4;"></div>
+        <div class="gradient-circle" style="width: 300px; height: 300px; top: -100px; left: -100px; background: #FFB366;"></div>
+        <div class="gradient-circle" style="width: 400px; height: 400px; bottom: -150px; right: -150px; background: #FFB3C5;"></div>
 
         <div class="container mx-auto relative z-10">
             <div class="max-w-4xl mx-auto text-center">
@@ -233,7 +234,7 @@
                     <p class="text-sm md:text-base mb-4" style="color: #333;">
                         明日の保育が、もっと楽しくなる。
                     </p>
-                    <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-4" style="color: #FFC5D0;">
+                    <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                         HoikUp
                     </h2>
                     <p class="text-lg md:text-xl mb-8" style="color: #555;">
@@ -249,7 +250,7 @@
     </section>
 
     <!-- App Mockup Section with Carousel -->
-    <section class="py-16 px-6 bg-gradient-to-b from-[#FFF9F9] to-[#FDF6F0]">
+    <section class="py-16 px-6 bg-gradient-to-b from-[#FFF9F9] to-[#FFF9F5]">
         <div class="container mx-auto">
             <div class="max-w-4xl mx-auto fade-in">
                 <p class="text-center text-sm mb-8" style="color: #666;">
@@ -263,7 +264,7 @@
                 <div class="carousel-container">
                     <button class="carousel-nav prev" onclick="changeSlide(-1)">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 18L9 12L15 6" stroke="#FFC5D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 18L9 12L15 6" stroke="#FFB366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
 
@@ -290,7 +291,7 @@
 
                     <button class="carousel-nav next" onclick="changeSlide(1)">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="#FFC5D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 18L15 12L9 6" stroke="#FFB366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
 
@@ -321,24 +322,24 @@
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-6" style="color: #333;">
-                        <span class="text-5xl font-poppins" style="color: #FFC5D0;">01</span><br>
+                        <span class="text-5xl font-poppins" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">01</span><br>
                         こんなお悩みありませんか？
                     </h3>
                     <ul class="space-y-3 text-base" style="color: #555;">
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             明日の保育アイデアが思い浮かばない
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             忙しい業務の合間に時短で保育情報を探したい
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             参考にした記事が見つからなくなった
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             他の保育士さんの工夫をもっと知りたい
                         </li>
                     </ul>
@@ -353,7 +354,7 @@
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
                 <div class="order-2 md:order-1">
                     <h3 class="text-2xl font-bold mb-6" style="color: #333;">
-                        <span class="text-5xl font-poppins" style="color: #FFC5D0;">02</span><br>
+                        <span class="text-5xl font-poppins" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">02</span><br>
                         HoikUpでできること
                     </h3>
                     <p class="text-base leading-relaxed" style="color: #555;">
@@ -383,24 +384,24 @@
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-6" style="color: #333;">
-                        <span class="text-5xl font-poppins" style="color: #FFC5D0;">03</span><br>
+                        <span class="text-5xl font-poppins" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">03</span><br>
                         使うメリット
                     </h3>
                     <ul class="space-y-3 text-base" style="color: #555;">
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             明日の保育がすぐ決まる
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             ネタ探しの時間を短縮できる
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             自分の工夫が仲間の役に立つ
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFC5D0;">•</span>
+                            <span class="mr-2" style="color: #FFB366;">•</span>
                             アイデアがどんどん貯まっていく
                         </li>
                     </ul>
@@ -410,11 +411,11 @@
     </section>
 
     <!-- 4 Feature Cards -->
-    <section class="py-16 px-6 bg-gradient-to-b from-[#FFF9F9] to-[#FDF6F0]">
+    <section class="py-16 px-6 bg-gradient-to-b from-[#FFF9F9] to-[#FFF9F5]">
         <div class="container mx-auto">
             <div class="text-center mb-12 fade-in">
                 <h3 class="text-3xl font-bold mb-4" style="color: #333;">4つの便利機能</h3>
-                <div class="w-16 h-1 bg-[#FFC5D0] mx-auto rounded-full"></div>
+                <div class="w-16 h-1 mx-auto rounded-full" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);"></div>
             </div>
 
             <div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -486,7 +487,7 @@
         <div class="container mx-auto">
             <div class="max-w-3xl mx-auto text-center fade-in">
                 <h3 class="text-3xl font-bold mb-4" style="color: #333;">お問い合わせ</h3>
-                <div class="w-16 h-1 bg-[#FFC5D0] mx-auto rounded-full mb-8"></div>
+                <div class="w-16 h-1 mx-auto rounded-full mb-8" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);"></div>
 
                 <!-- Instagram Link -->
                 <div class="mt-8">
