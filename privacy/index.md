@@ -96,7 +96,7 @@ HoikUp（以下「本アプリ」といいます。）の運営者（以下「�
 
 本ポリシーに関するお問い合わせは、以下までご連絡ください。
 
-お問い合わせ先メールアドレス：[hoikup.official@gmail.com](mailto:hoikup.official@gmail.com)（※実運用のメールアドレスに置き換えてください）
+お問い合わせ先メールアドレス：[hoikup.official@gmail.com](mailto:hoikup.official@gmail.com)
 
 ---
 
