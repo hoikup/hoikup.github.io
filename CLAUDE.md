@@ -66,16 +66,23 @@
 8. **毎週更新・季節特集**
    - 春夏秋冬の特集タグを表示
 
-9. **Instagram導線**
+9. **投稿者向けメリット**
+   - 画像：`img/mock3.png`（投稿画面、左配置）
+   - タイトル：「アイデアを探すだけじゃない。あなたの保育も発信できます。」
+   - 投稿するメリット×5項目（投稿者名表示 / Instagram・Webリンク掲載 など）
+   - 「アプリで投稿してみる」App Store CTA（location: post）
+   - ※断定的表現は避け「活動を知ってもらえる」等の自然な表現に統一
+
+10. **Instagram導線**
    - アイコン：`img/Instagram_Glyph_Gradient.svg`
    - 「毎日、保育アイデアを配信中！」訴求
    - @hoikup_official フォローボタン → `https://www.instagram.com/hoikup_official/`
 
-10. **最後のCTA**
+11. **最後のCTA**
     - 「明日の保育、もっとワクワクしよう。」
     - App Store ボタン（黒・大）
 
-11. **フッター**
+12. **フッター**
     - 利用規約（`terms/`）・プライバシーポリシー（`privacy/`）リンク
     - コピーライト：Copyright 2026 HoikUp. All Rights Reserved.
 
