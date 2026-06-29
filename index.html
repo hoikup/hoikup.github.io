@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HoikUp（ほいくあっぷ）- 保育アイデアを探して・シェアできるアプリ</title>
+    <title>HoikUp（ほいくあっぷ）- 毎日の保育アイデアが見つかる無料アプリ</title>
+    <meta name="description" content="製作・遊び・行事のアイデアを、全国の保育士とシェアできる無料アプリ。明日の保育がすぐ決まる。App Storeで無料ダウンロード。">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ5B6WNKS0"></script>
@@ -62,6 +63,35 @@
             box-shadow: 0 10px 25px rgba(255, 179, 102, 0.3);
         }
 
+        /* App Store CTA button */
+        .appstore-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #000;
+            color: #fff;
+            border-radius: 14px;
+            padding: 12px 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .appstore-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        .appstore-btn .label-small {
+            font-size: 11px;
+            line-height: 1.1;
+            opacity: 0.85;
+        }
+
+        .appstore-btn .label-large {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
         /* Gradient background - オレンジ→ピンクグラデーション */
         .gradient-bg {
             background: linear-gradient(135deg, #FFF9F5 0%, #FFE5CC 30%, #FFDCE5 70%, #FFD5E0 100%);
@@ -75,9 +105,21 @@
             z-index: 0;
         }
 
+        /* Text gradient helper */
+        .text-gradient {
+            background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         /* Card shadow */
         .card-shadow {
             box-shadow: 0 4px 15px rgba(255, 179, 102, 0.15);
+        }
+
+        .phone-shadow {
+            box-shadow: 0 20px 50px rgba(255, 138, 101, 0.25);
         }
 
         /* Image carousel */
@@ -116,7 +158,7 @@
 
         .carousel-nav {
             position: absolute;
-            top: 50%;
+            top: 45%;
             transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.9);
             border: none;
@@ -187,6 +229,14 @@
             object-position: center;
         }
 
+        /* App screenshot (already framed in iPhone mock) */
+        .app-screen {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+            display: block;
+        }
+
         /* Header logo */
         .header-logo {
             height: 60px;
@@ -195,27 +245,49 @@
 
         @media (max-width: 640px) {
             .header-logo {
-                height: 48px;
+                height: 44px;
+            }
+        }
+
+        /* Mobile sticky CTA bar */
+        .mobile-cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+            padding: 10px 16px;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-cta-bar {
+                display: none;
+            }
+            body {
+                padding-bottom: 0 !important;
             }
         }
     </style>
 </head>
-<body class="bg-[#FFF9F5]">
+<body class="bg-[#FFF9F5]" style="padding-bottom: 84px;">
 
     <!-- Header / Logo -->
-    <header class="py-4 px-6 bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 shadow-sm">
+    <header class="py-3 px-6 bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 shadow-sm">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
                 <img src="img/Logo.png" alt="HoikUp" class="header-logo">
             </div>
-            <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" class="inline-flex items-center bg-black text-white px-5 py-2 rounded-xl btn-hover" style="box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-5 h-5 mr-2 flex-shrink-0" fill="white">
+            <!-- App Store URL: https://apps.apple.com/jp/app/hoikup/id6760159380 -->
+            <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" rel="noopener"
+               onclick="gtag('event','click_appstore',{location:'header'})"
+               class="hidden sm:inline-flex items-center gap-2 bg-black text-white px-5 py-2 rounded-full text-sm font-medium btn-hover">
+                <svg width="16" height="16" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
                 </svg>
-                <div class="text-left leading-tight">
-                    <div class="text-xs opacity-80">Download on the</div>
-                    <div class="text-sm font-semibold">App Store</div>
-                </div>
+                App Storeでダウンロード
             </a>
         </div>
     </header>
@@ -227,81 +299,80 @@
         <div class="gradient-circle" style="width: 400px; height: 400px; bottom: -150px; right: -150px; background: #FFB3C5;"></div>
 
         <div class="container mx-auto relative z-10">
-            <div class="max-w-4xl mx-auto text-center">
-                <!-- Hero Image -->
-                <div class="mb-6 fade-in">
-                    <img src="img/women.jpg"
-                         alt="保育士イメージ"
-                         class="rounded-3xl w-full max-w-2xl mx-auto card-shadow">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+                <!-- Hero Text -->
+                <div class="text-center md:text-left fade-in">
+                    <h1 class="font-poppins text-2xl font-bold mb-3 text-gradient">HoikUp</h1>
+                    <p class="text-2xl md:text-4xl font-bold leading-snug mb-4" style="color: #333;">
+                        毎日の保育アイデアが、<br>ここで見つかる。
+                    </p>
+                    <p class="text-base md:text-lg mb-8" style="color: #555;">
+                        製作・遊び・行事のアイデアを、<br class="hidden sm:block">
+                        全国の保育士とシェアできる<span class="font-bold text-gradient">無料アプリ</span>。
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center md:items-start gap-3 justify-center md:justify-start">
+                        <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" rel="noopener"
+                           onclick="gtag('event','click_appstore',{location:'hero'})" class="appstore-btn">
+                            <svg width="26" height="26" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                            </svg>
+                            <span class="text-left">
+                                <span class="label-small block">無料でダウンロード</span>
+                                <span class="label-large block">App Store</span>
+                            </span>
+                        </a>
+                    </div>
+                    <p class="text-xs mt-3" style="color: #888;">iPhone対応 / インストール無料</p>
                 </div>
 
-                <!-- Hero Text -->
+                <!-- Hero App Screen -->
                 <div class="fade-in">
-                    <p class="text-sm md:text-base mb-4" style="color: #333;">
-                        明日の保育が、もっと楽しくなる。
-                    </p>
-                    <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                        HoikUp
-                    </h2>
-                    <p class="text-lg md:text-xl mb-8" style="color: #555;">
-                        保育士が「明日」もっとワクワクするアプリ。<br>
-                        毎日の保育に、すこしの「あっぷ」を届けます。
-                    </p>
-                    <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" class="inline-flex items-center bg-black text-white px-8 py-4 rounded-2xl btn-hover" style="box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-8 h-8 mr-4 flex-shrink-0" fill="white">
-                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                        </svg>
-                        <div class="text-left leading-tight">
-                            <div class="text-sm opacity-80">Download on the</div>
-                            <div class="text-xl font-semibold">App Store</div>
-                        </div>
-                    </a>
+                    <img src="img/mock1.png" alt="HoikUpのホーム画面" class="app-screen phone-shadow" style="max-width: 260px;">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- App Mockup Section with Carousel -->
+    <!-- App Screens Showcase (Carousel) -->
     <section class="py-16 px-6 bg-gradient-to-b from-[#FFF9F9] to-[#FFF9F5]">
         <div class="container mx-auto">
-            <div class="max-w-4xl mx-auto fade-in">
-                <p class="text-center text-sm mb-8" style="color: #666;">
-                    HoikUp（ほいくあっぷ）は、<br>
-                    保育アイデアを探して・シェアできるアプリです。<br>
-                    製作・遊び・行事…あなたの工夫が、<br>
-                    誰かの助けになります。
-                </p>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10 fade-in">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3" style="color: #333;">アプリの中身をのぞいてみる</h2>
+                    <div class="w-16 h-1 mx-auto rounded-full" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);"></div>
+                    <p class="text-sm md:text-base mt-5" style="color: #666;">
+                        製作・遊び・行事…保育のアイデアが写真付きでずらり。<br class="hidden sm:block">
+                        探す・保存する・投稿する。すべてアプリひとつで完結します。
+                    </p>
+                </div>
 
                 <!-- Carousel -->
-                <div class="carousel-container">
-                    <button class="carousel-nav prev" onclick="changeSlide(-1)">
+                <div class="carousel-container fade-in">
+                    <button class="carousel-nav prev" onclick="changeSlide(-1)" aria-label="前へ">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="#FFB366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
 
                     <div class="carousel-slide active">
-                        <img src="img/mock1.png"
-                             alt="アプリ画面"
-                             class="rounded-3xl mx-auto card-shadow">
-                        <p class="text-center mt-4 text-sm" style="color: #666;">※開発中のイメージです</p>
+                        <img src="img/mock1.png" alt="ホーム画面" class="rounded-3xl mx-auto">
+                        <p class="text-center mt-4 font-bold" style="color: #333;">ホーム</p>
+                        <p class="text-center text-sm" style="color: #666;">新着アイデアが毎日流れてくる</p>
                     </div>
 
                     <div class="carousel-slide">
-                        <img src="img/mock2.png"
-                             alt="アプリ画面"
-                             class="rounded-3xl mx-auto card-shadow">
-                        <p class="text-center mt-4 text-sm" style="color: #666;">※開発中のイメージです</p>
+                        <img src="img/mock2.png" alt="アイデア詳細画面" class="rounded-3xl mx-auto">
+                        <p class="text-center mt-4 font-bold" style="color: #333;">アイデア詳細</p>
+                        <p class="text-center text-sm" style="color: #666;">作り方・材料・ポイントまで分かる</p>
                     </div>
 
                     <div class="carousel-slide">
-                        <img src="img/mock3.png"
-                             alt="アプリ画面"
-                             class="rounded-3xl mx-auto card-shadow">
-                        <p class="text-center mt-4 text-sm" style="color: #666;">※開発中のイメージです</p>
+                        <img src="img/mock3.png" alt="投稿画面" class="rounded-3xl mx-auto">
+                        <p class="text-center mt-4 font-bold" style="color: #333;">かんたん投稿</p>
+                        <p class="text-center text-sm" style="color: #666;">写真とメモで自分の工夫をシェア</p>
                     </div>
 
-                    <button class="carousel-nav next" onclick="changeSlide(1)">
+                    <button class="carousel-nav next" onclick="changeSlide(1)" aria-label="次へ">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="#FFB366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -314,51 +385,55 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-12">
-                    <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" class="inline-flex items-center bg-black text-white px-8 py-4 rounded-2xl btn-hover" style="box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-8 h-8 mr-4 flex-shrink-0" fill="white">
+                <!-- AI image note -->
+                <p class="text-center text-xs mt-6 max-w-md mx-auto fade-in" style="color: #999;">
+                    💡 写真が用意しにくい活動も、AIイメージ画像付きで分かりやすく紹介しています。
+                </p>
+
+                <div class="text-center mt-10 fade-in">
+                    <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" rel="noopener"
+                       onclick="gtag('event','click_appstore',{location:'showcase'})" class="appstore-btn">
+                        <svg width="26" height="26" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
                         </svg>
-                        <div class="text-left leading-tight">
-                            <div class="text-sm opacity-80">Download on the</div>
-                            <div class="text-xl font-semibold">App Store</div>
-                        </div>
+                        <span class="text-left">
+                            <span class="label-small block">無料でダウンロード</span>
+                            <span class="label-large block">App Store</span>
+                        </span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Feature Section 01 -->
+    <!-- Feature Section 01 - 悩み -->
     <section class="py-16 px-6">
         <div class="container mx-auto">
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
                 <div>
-                    <img src="img/introduction01.png"
-                         alt="保育アイデア"
-                         class="rounded-3xl card-shadow intro-image">
+                    <img src="img/introduction01.png" alt="保育に悩む保育士" class="rounded-3xl card-shadow intro-image">
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold mb-6" style="color: #333;">
-                        <span class="text-5xl font-poppins" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">01</span><br>
-                        こんなお悩みありませんか？
+                        <span class="text-5xl font-poppins text-gradient">01</span><br>
+                        こんなお悩み、ありませんか？
                     </h3>
-                    <ul class="space-y-3 text-base" style="color: #555;">
+                    <ul class="space-y-4 text-base" style="color: #555;">
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            明日の保育アイデアが思い浮かばない
+                            <span class="mr-3 text-xl">😣</span>
+                            明日の製作、何をしようか思いつかない
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            忙しい業務の合間に時短で保育情報を探したい
+                            <span class="mr-3 text-xl">⏰</span>
+                            行事のネタ探しに、毎回時間がかかる
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            参考にした記事が見つからなくなった
+                            <span class="mr-3 text-xl">👀</span>
+                            他の園や先生のアイデアをのぞいてみたい
                         </li>
                         <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            他の保育士さんの工夫をもっと知りたい
+                            <span class="mr-3 text-xl">🌱</span>
+                            新人で、まだ保育の引き出しが少ない
                         </li>
                     </ul>
                 </div>
@@ -366,63 +441,73 @@
         </div>
     </section>
 
-    <!-- Feature Section 02 -->
+    <!-- Feature Section 02 - HoikUpなら解決（できること） -->
     <section class="py-16 px-6 bg-[#FFF9F9]">
         <div class="container mx-auto">
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
                 <div class="order-2 md:order-1">
                     <h3 class="text-2xl font-bold mb-6" style="color: #333;">
-                        <span class="text-5xl font-poppins" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">02</span><br>
-                        HoikUpでできること
+                        <span class="text-5xl font-poppins text-gradient">02</span><br>
+                        その悩み、HoikUpで解決。
                     </h3>
-                    <p class="text-base leading-relaxed" style="color: #555;">
-                        🔍 アイデアを探す：カテゴリやキーワードから簡単検索<br>
-                        📷 投稿する：写真やメモをアップしてアイデアを残せる<br>
-                        💾 保存する：気に入ったアイデアをマイページにストック<br>
-                        💬 共有する：同じ保育士同士でアイデアをシェア<br>
-                    </p>
+                    <p class="text-base mb-6" style="color: #555;">HoikUpなら、こんなことが今日からできます。</p>
+                    <ul class="space-y-3 text-base" style="color: #555;">
+                        <li class="flex items-start"><span class="mr-2 font-bold text-gradient">✓</span>季節ごとの製作アイデアを探せる</li>
+                        <li class="flex items-start"><span class="mr-2 font-bold text-gradient">✓</span>室内遊び・外遊びをキーワードで検索できる</li>
+                        <li class="flex items-start"><span class="mr-2 font-bold text-gradient">✓</span>運動会・発表会など行事のアイデアが見つかる</li>
+                        <li class="flex items-start"><span class="mr-2 font-bold text-gradient">✓</span>気になったアイデアをお気に入り保存できる</li>
+                        <li class="flex items-start"><span class="mr-2 font-bold text-gradient">✓</span>自分の保育アイデアを投稿してシェアできる</li>
+                    </ul>
+                    <div class="mt-8">
+                        <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" rel="noopener"
+                           onclick="gtag('event','click_appstore',{location:'solution'})" class="appstore-btn">
+                            <svg width="26" height="26" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                            </svg>
+                            <span class="text-left">
+                                <span class="label-small block">無料でダウンロード</span>
+                                <span class="label-large block">App Store</span>
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="order-1 md:order-2">
-                    <img src="img/introduction02.png"
-                         alt="HoikUpでできること"
-                         class="rounded-3xl card-shadow intro-image">
+                    <img src="img/introduction02.png" alt="HoikUpでできること" class="rounded-3xl card-shadow intro-image">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Feature Section 03 -->
+    <!-- 実際の画面（検索・詳細・投稿） -->
     <section class="py-16 px-6">
         <div class="container mx-auto">
-            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
+            <div class="text-center mb-12 fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-3" style="color: #333;">使い方は、かんたん。</h3>
+                <div class="w-16 h-1 mx-auto rounded-full" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);"></div>
+            </div>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
                 <div>
-                    <img src="img/introduction03.png"
-                         alt="使うメリット"
-                         class="rounded-3xl card-shadow intro-image">
+                    <img src="img/mock2.png" alt="アイデア詳細画面" class="app-screen" style="max-width: 240px;">
                 </div>
                 <div>
-                    <h3 class="text-2xl font-bold mb-6" style="color: #333;">
-                        <span class="text-5xl font-poppins" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">03</span><br>
-                        使うメリット
-                    </h3>
-                    <ul class="space-y-3 text-base" style="color: #555;">
-                        <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            明日の保育がすぐ決まる
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            ネタ探しの時間を短縮できる
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            自分の工夫が仲間の役に立つ
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-2" style="color: #FFB366;">•</span>
-                            アイデアがどんどん貯まっていく
-                        </li>
-                    </ul>
+                    <h4 class="text-xl font-bold mb-3" style="color: #333;">🔍 気になるアイデアを見つけて、すぐ実践</h4>
+                    <p class="text-base leading-relaxed" style="color: #555;">
+                        タグやキーワードでサッと検索。気になったアイデアを開けば、
+                        作り方・用意するもの・ポイントまで写真付きで分かります。
+                        明日の保育が、その場で決まります。
+                    </p>
+                </div>
+            </div>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in mt-16">
+                <div class="order-1 md:order-2">
+                    <img src="img/mock3.png" alt="投稿画面" class="app-screen" style="max-width: 240px;">
+                </div>
+                <div class="order-2 md:order-1">
+                    <h4 class="text-xl font-bold mb-3" style="color: #333;">📷 あなたの工夫も、全国へシェア</h4>
+                    <p class="text-base leading-relaxed" style="color: #555;">
+                        写真とひとことメモを添えるだけ。忙しい保育の合間でも、
+                        サッと投稿できます。あなたのアイデアが、どこかの先生の「助かった！」に。
+                    </p>
                 </div>
             </div>
         </div>
@@ -440,89 +525,164 @@
                 <!-- SEARCH -->
                 <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
                     <div class="mb-4">
-                        <img src="img/feature1.jpg"
-                             alt="検索"
-                             class="mx-auto feature-card-image rounded-2xl">
+                        <img src="img/feature1.jpg" alt="検索" class="mx-auto feature-card-image rounded-2xl">
                     </div>
-                    <h4 class="font-bold text-lg mb-3" style="color: #333;">SEARCH</h4>
-                    <p class="text-sm leading-relaxed" style="color: #666;">
-                        製作・遊び・行事のアイデアを写真やタグで簡単検索！<br><br>
-                        明日の保育にすぐ役立つ工夫が見つかります。
-                    </p>
+                    <h4 class="font-bold text-lg mb-3 text-gradient font-poppins">SEARCH</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">欲しい保育ネタが、すぐ見つかる</p>
                 </div>
 
                 <!-- SAVE -->
                 <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
                     <div class="mb-4">
-                        <img src="img/feature2.jpg"
-                             alt="保存"
-                             class="mx-auto feature-card-image rounded-2xl">
+                        <img src="img/feature2.jpg" alt="保存" class="mx-auto feature-card-image rounded-2xl">
                     </div>
-                    <h4 class="font-bold text-lg mb-3" style="color: #333;">SAVE</h4>
-                    <p class="text-sm leading-relaxed" style="color: #666;">
-                        気になるアイデアはワンタップでお気に入りに！<br><br>
-                        Wi-Fiがない場所でも見返せるので、<br>
-                        園内や外出先でも安心です。
-                    </p>
+                    <h4 class="font-bold text-lg mb-3 text-gradient font-poppins">SAVE</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">あとで見返したいアイデアを保存</p>
                 </div>
 
                 <!-- POST -->
                 <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
                     <div class="mb-4">
-                        <img src="img/feature3.jpg"
-                             alt="投稿"
-                             class="mx-auto feature-card-image rounded-2xl">
+                        <img src="img/feature3.jpg" alt="投稿" class="mx-auto feature-card-image rounded-2xl">
                     </div>
-                    <h4 class="font-bold text-lg mb-3" style="color: #333;">POST</h4>
-                    <p class="text-sm leading-relaxed" style="color: #666;">
-                        写真とひとことメモで、自分の工夫を簡単記録！<br><br>
-                        忙しい保育の合間でもサッと残せます。<br>
-                        仲間とアイデアを共有して、<br>
-                        保育の幅が広がります。
-                    </p>
+                    <h4 class="font-bold text-lg mb-3 text-gradient font-poppins">POST</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">あなたの保育アイデアを全国へ共有</p>
                 </div>
 
                 <!-- SHARE -->
                 <div class="bg-white rounded-3xl p-8 text-center card-shadow fade-in btn-hover">
                     <div class="mb-4">
-                        <img src="img/feature4.jpg"
-                             alt="共有"
-                             class="mx-auto feature-card-image rounded-2xl">
+                        <img src="img/feature4.jpg" alt="共有" class="mx-auto feature-card-image rounded-2xl">
                     </div>
-                    <h4 class="font-bold text-lg mb-3" style="color: #333;">SHARE</h4>
-                    <p class="text-sm leading-relaxed" style="color: #666;">
-                        気になるアイデアを仲間にシェア！<br><br>
-                        同僚や友人とも簡単に共有でき、<br>
-                        保育の工夫がもっと広がります。
-                    </p>
+                    <h4 class="font-bold text-lg mb-3 text-gradient font-poppins">SHARE</h4>
+                    <p class="text-sm leading-relaxed" style="color: #666;">気になったアイデアを簡単に共有</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact / CTA Section -->
-    <section id="register" class="py-16 px-6 bg-[#FFF9F9]">
+    <!-- 利用実績（定性表現） -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-12 fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-4" style="color: #333;">保育士に選ばれる理由</h3>
+                <div class="w-16 h-1 mx-auto rounded-full" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);"></div>
+            </div>
+            <div class="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 数字に変更可: 例 投稿数 1,200+ -->
+                <div class="bg-white rounded-3xl p-6 text-center card-shadow fade-in">
+                    <div class="text-3xl mb-2">🗓️</div>
+                    <p class="font-bold text-base" style="color: #333;">毎週更新</p>
+                    <p class="text-xs mt-1" style="color: #888;">新しいアイデアを追加</p>
+                </div>
+                <!-- 数字に変更可: 例 登録ユーザー 3,000+ -->
+                <div class="bg-white rounded-3xl p-6 text-center card-shadow fade-in">
+                    <div class="text-3xl mb-2">🌏</div>
+                    <p class="font-bold text-base" style="color: #333;">全国の保育士</p>
+                    <p class="text-xs mt-1" style="color: #888;">が参加中</p>
+                </div>
+                <!-- 数字に変更可: 例 ダウンロード 5,000+ -->
+                <div class="bg-white rounded-3xl p-6 text-center card-shadow fade-in">
+                    <div class="text-3xl mb-2">🎨</div>
+                    <p class="font-bold text-base" style="color: #333;">全カテゴリ網羅</p>
+                    <p class="text-xs mt-1" style="color: #888;">製作・遊び・行事</p>
+                </div>
+                <div class="bg-white rounded-3xl p-6 text-center card-shadow fade-in">
+                    <div class="text-3xl mb-2">💖</div>
+                    <p class="font-bold text-base" style="color: #333;">ずっと無料</p>
+                    <p class="text-xs mt-1" style="color: #888;">ダウンロード無料</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 毎週更新・季節特集 -->
+    <section class="py-16 px-6 bg-[#FFF9F9]">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-4" style="color: #333;">アイデアは、どんどん増えていく。</h3>
+                <div class="w-16 h-1 mx-auto rounded-full mb-6" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);"></div>
+                <p class="text-base mb-8" style="color: #555;">
+                    HoikUpは毎週新しい保育アイデアを追加中。<br>
+                    季節に合わせた特集も随時お届けします。
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="bg-white px-5 py-2 rounded-full text-sm font-medium card-shadow" style="color: #FF9966;">🌸 春の製作</span>
+                    <span class="bg-white px-5 py-2 rounded-full text-sm font-medium card-shadow" style="color: #66B3D9;">🎐 夏の遊び</span>
+                    <span class="bg-white px-5 py-2 rounded-full text-sm font-medium card-shadow" style="color: #E0915C;">🍂 秋の行事</span>
+                    <span class="bg-white px-5 py-2 rounded-full text-sm font-medium card-shadow" style="color: #E57FA0;">⛄ 冬の製作</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram導線 -->
+    <section class="py-16 px-6">
         <div class="container mx-auto">
             <div class="max-w-3xl mx-auto text-center fade-in">
-                <h3 class="text-3xl font-bold mb-4" style="color: #333;">お問い合わせ</h3>
-                <div class="w-16 h-1 mx-auto rounded-full mb-8" style="background: linear-gradient(135deg, #FFB366 0%, #FFB3C5 100%);"></div>
-
-                <!-- Instagram Link -->
-                <div class="mt-8">
-                    <a href="https://www.instagram.com/hoikup_official/" target="_blank" class="inline-flex items-center justify-center text-base font-medium" style="color: #6DADE3;">
-                        <img src="img/Instagram_Glyph_Gradient.svg" alt="Instagram" class="w-6 h-6 mr-2">
-                        @hoikup_official
+                <div class="rounded-3xl p-10 card-shadow" style="background: linear-gradient(135deg, #FFF3EC 0%, #FFE9F0 100%);">
+                    <img src="img/Instagram_Glyph_Gradient.svg" alt="Instagram" class="w-12 h-12 mx-auto mb-4">
+                    <h3 class="text-xl md:text-2xl font-bold mb-2" style="color: #333;">毎日、保育アイデアを配信中！</h3>
+                    <p class="text-sm mb-6" style="color: #666;">Instagramでも保育ネタをお届け。チェック＆フォローしてね。</p>
+                    <a href="https://www.instagram.com/hoikup_official/" target="_blank" rel="noopener"
+                       onclick="gtag('event','click_instagram')"
+                       class="inline-flex items-center justify-center gap-2 bg-white px-6 py-3 rounded-full text-base font-bold btn-hover" style="color: #C13584;">
+                        <img src="img/Instagram_Glyph_Gradient.svg" alt="" class="w-5 h-5">
+                        @hoikup_official をフォロー
                     </a>
-                    <p class="text-sm mt-2" style="color: #666;">DMにてお問い合わせください。</p>
+                    <p class="text-xs mt-4" style="color: #999;">お問い合わせはDMにて承ります。</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最後のCTA -->
+    <section class="py-20 px-6 gradient-bg relative overflow-hidden">
+        <div class="gradient-circle" style="width: 300px; height: 300px; top: -120px; right: -80px; background: #FFB3C5;"></div>
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-2xl mx-auto text-center fade-in">
+                <h3 class="text-2xl md:text-3xl font-bold mb-4" style="color: #333;">
+                    明日の保育、もっとワクワクしよう。
+                </h3>
+                <p class="text-base mb-8" style="color: #555;">
+                    保育アイデアが見つかる無料アプリ「HoikUp」。<br>
+                    今すぐダウンロードして使ってみてください。
+                </p>
+                <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" rel="noopener"
+                   onclick="gtag('event','click_appstore',{location:'footer_cta'})" class="appstore-btn">
+                    <svg width="28" height="28" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                    </svg>
+                    <span class="text-left">
+                        <span class="label-small block">無料でダウンロード</span>
+                        <span class="label-large block">App Store</span>
+                    </span>
+                </a>
+                <p class="text-xs mt-3" style="color: #888;">iPhone対応 / インストール無料</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-8 px-6 bg-white text-center">
-        <p class="text-sm" style="color: #999;">Copyright 2025 HoikUp. All Rights Reserved.</p>
+        <div class="flex justify-center gap-4 mb-3 text-sm">
+            <a href="terms/" class="hover:underline" style="color: #888;">利用規約</a>
+            <a href="privacy/" class="hover:underline" style="color: #888;">プライバシーポリシー</a>
+        </div>
+        <p class="text-sm" style="color: #999;">Copyright 2026 HoikUp. All Rights Reserved.</p>
     </footer>
+
+    <!-- Mobile Sticky CTA Bar -->
+    <div class="mobile-cta-bar">
+        <a href="https://apps.apple.com/jp/app/hoikup/id6760159380" target="_blank" rel="noopener"
+           onclick="gtag('event','click_appstore',{location:'sticky_bar'})"
+           class="appstore-btn" style="display: flex; width: 100%; justify-content: center; padding: 12px;">
+            <svg width="24" height="24" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+            </svg>
+            <span class="label-large">App Storeで無料ダウンロード</span>
+        </a>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -540,7 +700,6 @@
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(el => observer.observe(el));
@@ -574,7 +733,7 @@
             showSlide(currentSlide);
         }
 
-        // Auto-play carousel (optional)
+        // Auto-play carousel
         setInterval(() => {
             changeSlide(1);
         }, 5000);
